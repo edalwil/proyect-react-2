@@ -18,7 +18,7 @@ const Card = () => {
       setIsF(true)
     }
   };
-  
+
   const success = (pos) => {
     const latitude = pos.coords.latitude;
     const longitude = pos.coords.longitude;
@@ -41,7 +41,7 @@ const Card = () => {
     navigator.geolocation.getCurrentPosition(success);
   }, []);
 
-  console.log(location);
+
 
 
   return (
@@ -53,7 +53,7 @@ const Card = () => {
       <div className="counter-card-wheather">
         <div className="temperature">
           <p> <b className="text-black">{fahrenheit} {isF ? "°F" : "°C"}</b></p>
-          <img src={`http://openweathermap.org/img/wn/${location?.weather[0].icon}@2x.png` }             alt="" />
+          <img src={location?.weather  ?`http://openweathermap.org/img/wn/${location?.weather[0].icon}@2x.png`  : null }   alt="" />
         </div>
         <div className="weather-data">
           <p>"{location?.weather[0].description}"</p>
