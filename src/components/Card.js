@@ -20,19 +20,24 @@ const Card = () => {
   };
 
   const success = (pos) => {
+
+    let lat = pos.coords?.latitude
+    let lon = pos.coords?.longitude
+   
    
   
 
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=4.1117995&lon=-73.6418357&appid=528b9cc5bfe8a63444aee99710414cb9`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=528b9cc5bfe8a63444aee99710414cb9`)
      .then((res) => {
         setLocation(res.data);
         setFahrenheit(res.data?.main.temp - 221.07);
      })
+     console.log(pos);
   }
     
 
 
- 
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(success);
