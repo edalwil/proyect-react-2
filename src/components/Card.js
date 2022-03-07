@@ -18,26 +18,26 @@ const Card = () => {
       setIsF(true)
     }
   };
+  
+  const success = (pos) => {
+    const latitude = pos.coords.latitude;
+    const longitude = pos.coords.longitude;
 
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=528b9cc5bfe8a63444aee99710414cb9`
+      )
+      .then((res) => {
+        setLocation(res.data);
+        setFahrenheit(res.data?.main.temp - 221.07);
+      });
+
+  };
 
 
  
 
   useEffect(() => {
-    const success = (pos) => {
-      const latitude = pos.coords.latitude;
-      const longitude = pos.coords.longitude;
-  
-      axios
-        .get(
-          `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=528b9cc5bfe8a63444aee99710414cb9`
-        )
-        .then((res) => {
-          setLocation(res.data);
-          setFahrenheit(res.data?.main.temp - 221.07);
-        });
- 
-    };
     navigator.geolocation.getCurrentPosition(success);
   }, []);
 
